@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/imk-toolkit/imk-toolkit:
+      branch: master
+      repo: https://github.com/imk-toolkit/imk-toolkit
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/imk-toolkit/imk-toolkit git:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-denim-millipede.sh
+        container: qc.acc_skimpy-brass-buffalo
+  QC.Doc:
+    repos:
+      github.com/imk-toolkit/imk-toolkit find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-carmine-kangaroo.sh
+        container: qc.doc_squeaky-charcoal-skunk
+      github.com/imk-toolkit/imk-toolkit git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-linen-bombay.sh
+        container: qc.doc_seedy-carmine-oyster
+      github.com/imk-toolkit/imk-toolkit markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-aquamarine-numbat.sh
+        container: qc.doc_cheeky-salmon-bombay
+  QC.Lic:
+    repos:
+      github.com/imk-toolkit/imk-toolkit licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-vermilion-snail.sh
+        container: qc.lic_homely-harlequin-boar
+  QC.Sec:
+    repos:
+      github.com/imk-toolkit/imk-toolkit bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.flabby-emerald-numbat.sh
+        container: qc.sec_sunny-cream-sheep
+  QC.Sty:
+    repos:
+      github.com/imk-toolkit/imk-toolkit flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-amber-tuatara.sh
+        container: qc.sty_grumpy-eggplant-sheepdog
+      github.com/imk-toolkit/imk-toolkit hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-russet-eleuth.sh
+        container: qc.sty_scaly-mauve-baboon
+  QC.Ver:
+    repos:
+      github.com/imk-toolkit/imk-toolkit get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-green-panda.sh
+        container: qc.ver_snazzy-auburn-bear
+timeout: 1800
